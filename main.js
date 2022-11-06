@@ -1,22 +1,31 @@
-gsap.registerPlugin(ScrollTrigger);
+// gsap.registerPlugin(ScrollTrigger);
 
-gsap.fromTo(
-  ".card:not(:first-child)",
+let tl = gsap.timeline({
+  scrollTrigger: {
+    pin: ".cards",
+    markers: true,
+    scrub: true,
+    start: "top top",
+    end: "bottom top",
+    invalidateOnRefresh: true,
+  },
+});
+tl.fromTo(
+  ".card-front",
   {
-    x: () => window.innerWidth / 2 + 100,
-    rotate: -90,
+    rotationY: 0,
   },
   {
     x: 0,
-    stagger: 0.5,
-    rotate: 0,
-    scrollTrigger: {
-      pin: ".cards",
-      markers: true,
-      scrub: true,
-      start: "top center",
-      end: "bottom top",
-      invalidateOnRefresh: true,
-    },
+    rotationY: "+=90",
+  }
+).fromTo(
+  ".card-back",
+  {
+    rotationY: -90,
+  },
+  {
+    x: 0,
+    rotationY: "+=90",
   }
 );
