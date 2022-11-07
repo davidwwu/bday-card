@@ -1,9 +1,7 @@
-// gsap.registerPlugin(ScrollTrigger);
-
 let tl = gsap.timeline({
   scrollTrigger: {
     pin: ".cards",
-    markers: true,
+    markers: false,
     scrub: true,
     start: "top top",
     end: "bottom top",
@@ -13,19 +11,29 @@ let tl = gsap.timeline({
 tl.fromTo(
   ".card-front",
   {
-    rotationY: 0,
+    scale: 0.75,
   },
   {
-    x: 0,
-    rotationY: "+=90",
+    scale: 1,
   }
-).fromTo(
-  ".card-back",
-  {
-    rotationY: -90,
-  },
-  {
-    x: 0,
-    rotationY: "+=90",
-  }
-);
+)
+  .fromTo(
+    ".card-front",
+    {
+      transformStyle: "preserve-3d",
+      rotationY: 0,
+    },
+    {
+      rotationY: "+=90",
+    }
+  )
+  .fromTo(
+    ".card-back",
+    {
+      transformStyle: "preserve-3d",
+      rotationY: -90,
+    },
+    {
+      rotationY: "+=90",
+    }
+  );
